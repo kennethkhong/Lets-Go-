@@ -75,18 +75,18 @@
     <button class="choice"> 星期六午餐 🥓 </button>
     <button class="choice"> 星期六晚餐 🕯️ </button>
     <p></p>
-    <button class="primary" onclick="next()">非常良辰!</button>
+    <button class="primary" onclick="requireChoice('when', next)">非常良辰!</button>
   </section>
 
   <!-- STEP 3: choose food. data-key says which pass field it fills -->
   <section class="step" data-key="food">
-    <h1>吃什么好呢? 🍜</h1>
+    <h1>吃什么好呢? 🍽️</h1>
     <button class="choice">碳马烤肉!🍖 </button>
     <button class="choice">Kira Dining!💋 </button>
     <button class="choice">Omakase 🍣</button>
     <button class="choice">Jennise保留绝对的决定权 👸</button>
     <p></p>
-    <button class="primary" onclick="finish()">选好咯!</button>
+    <button class="primary" onclick="requireChoice('food', finish)">选好咯!</button>
   </section>
 
 
@@ -161,6 +161,15 @@
       a.click();
     });
   }
+// Only continue if the person picked something for this step
+function requireChoice(key, action) {
+  if (!choices[key]) {
+    alert('还没选哦 🥲');
+    return;
+  }
+  action();
+}
+  
 </script>
 </body>
 </html>
