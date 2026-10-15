@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>A question for you</title>
+<title>我是谁我在哪?</title>
 <style>
   /* 1. COLORS live in variables so you can re-theme in one place */
   :root {
@@ -39,6 +39,13 @@
   .step.active { display: block; animation: pop .35s ease; }
   @keyframes pop { from { transform: scale(.95); opacity: 0; } to { transform: none; opacity: 1; } }
 
+  /* Hidden class for delaying Step 0 with a smooth fade-in */
+  .hidden { 
+    opacity: 0; 
+    pointer-events: none; 
+    transition: opacity 0.5s ease; 
+  }
+
   /* The ticket at the end */
   #pass { border: 2px dashed var(--accent); border-radius: 16px; padding: 16px; margin: 16px 0; background: #fff; text-align: left; }
   #pass img { width: 100%; border-radius: 12px; margin-top: 8px; }
@@ -50,54 +57,43 @@
 
   <!-- STEP 0: the question -->
   <section class="step active" id="s0">
-    <h1>Will you go on a date with me? 💌</h1>
-    <button class="primary" onclick="next()">Yes 💖</button>
-    <button id="no">No 🙈</button>
+    <h1>我们还吃不吃三周年庆祝?! 💌</h1>
+    <button class="primary" onclick="next()">吃爆!! 💖</button>
+    <button id="no">哼!不要! 🙈</button>
   </section>
 
   <!-- STEP 1: reaction -->
   <section class="step">
-    <h1>Really?! 😳</h1>
-    <p>I'm so happy. Let's plan it.</p>
-    <button class="primary" onclick="next()">Next</button>
+    <h1>尊嘟假嘟?! 😳</h1>
+    <p>你一定以为我偷偷忘记了吧🫪.</p>
+    <button class="primary" onclick="next()">开始计划!</button>
   </section>
 
-  <!-- STEP 2: pick a date and time -->
-  <section class="step">
-    <h1>When are you free? 📅</h1>
-    <input type="datetime-local" id="when">
+  <!-- STEP 2: 选个良辰吉日吃哦哦哦 -->
+  <section class="step" data-key="when">
+    <h1> 什么时候要吃大餐! </h1> 📅</h1>
+    <button class="choice"> 星期六午餐 🥓 </button>
+    <button class="choice"> 星期六晚餐 🕯️ </button>
     <p></p>
-    <button class="primary" onclick="saveDate()">Next</button>
+    <button class="primary" onclick="next()">非常良辰!</button>
   </section>
 
   <!-- STEP 3: choose food. data-key says which pass field it fills -->
   <section class="step" data-key="food">
-    <h1>What shall we eat? 🍜</h1>
-    <button class="choice">Sushi 🍣</button>
-    <button class="choice">Burgers 🍔</button>
-    <button class="choice">Hot pot 🍲</button>
-    <button class="choice">Ramen 🍜</button>
-    <button class="choice">Dessert 🍨</button>
+    <h1>吃什么好呢? 🍜</h1>
+    <button class="choice">碳马烤肉!🍖 </button>
+    <button class="choice">Kira Dining!💋 </button>
+    <button class="choice">Omakase 🍣</button>
     <p></p>
-    <button class="primary" onclick="next()">Next</button>
+    <button class="primary" onclick="next()">选好咯!</button>
   </section>
 
-  <!-- STEP 4: choose activity -->
-  <section class="step" data-key="activity">
-    <h1>Where after dinner? 🎡</h1>
-    <button class="choice">Movie 🎬</button>
-    <button class="choice">A walk 🌳</button>
-    <button class="choice">Spa 💅</button>
-    <button class="choice">Theme park 🎡</button>
-    <p></p>
-    <button class="primary" onclick="finish()">Done</button>
-  </section>
 
-  <!-- STEP 5: the date pass -->
+  <!-- STEP 4: the date pass -->
   <section class="step">
-    <h1>It's a date! ❤️</h1>
+    <h1>那就确定咯! ❤️</h1>
     <div id="pass">
-      <strong>DATE PASS</strong>
+      <strong>约会邀请</strong>
       <p>📅 <span id="p-when">-</span></p>
       <p>🍜 <span id="p-food">-</span></p>
       <p>✨ <span id="p-activity">-</span></p>
@@ -142,9 +138,8 @@
   }
 
   function finish() {
-    document.getElementById('p-when').textContent = choices.when || '-';
-    document.getElementById('p-food').textContent = choices.food || 'Surprise me';
-    document.getElementById('p-activity').textContent = choices.activity || 'Surprise me';
+    document.getElementById('p-when').textContent = choices.when || '还没选哦 🥲';
+    document.getElementById('p-food').textContent = choices.food || '还没选哦 🥲';
     next();
   }
 
